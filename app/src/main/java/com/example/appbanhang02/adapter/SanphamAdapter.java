@@ -1,12 +1,14 @@
 package com.example.appbanhang02.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbanhang02.R;
+import com.example.appbanhang02.activity.DienThoaiActivity;
 import com.example.appbanhang02.model.Sanpham;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +43,7 @@ public class SanphamAdapter extends RecyclerView.Adapter <SanphamAdapter.ItemHol
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
         Sanpham sanpham = arraysanpham.get(position);
         holder.txttensanpham.setText(sanpham.getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
@@ -49,6 +52,7 @@ public class SanphamAdapter extends RecyclerView.Adapter <SanphamAdapter.ItemHol
                 .placeholder(R.drawable.common_google_signin_btn_icon_dark_disabled)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(holder.imghinhanhsanpham);
+
     }
 
     @Override

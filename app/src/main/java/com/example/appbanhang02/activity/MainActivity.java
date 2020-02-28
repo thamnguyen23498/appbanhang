@@ -47,21 +47,18 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 import static com.example.appbanhang02.ultil.Server.DuongdanLoaisp;
+import static com.example.appbanhang02.ultil.Server.Duongdanspmoinhat;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerView_main ,rcl_loaisp;
     NavigationView navigationView_main;
-    ListView listView_main ;
     DrawerLayout drawerLayout;
 
     ArrayList<Loaisp> mangloaisp;
     LoaispAdapter loaispAdapter;
 
-    int maloaisp;
-    String tenloaisp = " ";
-    String hinhanhloaisp =" ";
 
     ArrayList<Sanpham> mangsanpham;
     SanphamAdapter sanphamAdapter;
@@ -74,49 +71,40 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionViewFlipper();
         layDuLieuLoaiSP();
+        GetDuLieuSP();
 
 
 
     }
 
     private void GetDuLieuSP() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.Duongdansp, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                if (response !=null){
-                    int masp = 0;
-                    String tensp = "";
-                    Integer giasp = 0;
-                    String motasp = "";
-                    String hinhanhsp = "";
-                    int maloaisp = 0;
-                    for (int i = 0 ;i<response.length();i++){
-                        try {
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            masp = jsonObject.getInt("masp");
-                            tensp = jsonObject.getString("tensp");
-                            giasp = jsonObject.getInt("giasp");
-                            hinhanhsp = jsonObject.getString("hinhanhsp");
-                            motasp = jsonObject.getString("motasp");
-                            maloaisp = jsonObject.getInt("maloaisp");
-                            mangsanpham.add(new Sanpham(masp,tensp,giasp,hinhanhsp,motasp,maloaisp));
-                            sanphamAdapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+       RequestQueue requestQueue = Volley.newRequestQueue(this);
+       StringRequest request = new StringRequest(Request.Method.GET, Duongdanspmoinhat,
+               new Response.Listener<String>() {
+                   @Override
+                   public void onResponse(String response) {
+                       try {
+                           JSONArray jsonArray = new JSONArray(response);
+                           for (int i=0;i<jsonArray.length();i++){
+                               JSONObject jsonObject= jsonArray.getJSONObject(i);
+                               mangsanpham.add(new Sanpham(
+                                       jsonObject.getString("tensp"),
+                                       jsonObject.getString("hinhsp"),
+                                       jsonObject.getInt("giasp")
+                               ));
+                           }
+                           sanphamAdapter.notifyDataSetChanged();
+                       } catch (JSONException e) {
+                           e.printStackTrace();
+                       }
+                   }
+               }, new ErrorListener() {
+           @Override
+           public void onErrorResponse(VolleyError error) {
 
-                    }
-                }
-            }
-        }, new Response.ErrorListener(){
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
+           }
+       });
+       requestQueue.add(request);
     }
 
     private void layDuLieuLoaiSP() {

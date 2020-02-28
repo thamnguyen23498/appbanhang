@@ -1,17 +1,20 @@
 package com.example.appbanhang02.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbanhang02.R;
+import com.example.appbanhang02.activity.DienThoaiActivity;
 import com.example.appbanhang02.model.Loaisp;
 import com.squareup.picasso.Picasso;
 
@@ -34,10 +37,23 @@ public class LoaispAdapter extends RecyclerView.Adapter<LoaispAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Loaisp loaisp = loaispArrayList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final Loaisp loaisp = loaispArrayList.get(position);
         holder.txt_loaisp.setText(loaisp.getTenloaisp());
         Picasso.with(context).load(loaisp.getHinhanhloaisp()).into(holder.img_anhloaisp);
+        holder.layout_loaisp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(context, DienThoaiActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("maloaisp",loaisp.getMaloaisp());
+                        context.startActivity(intent);
+                        break;
+                }
+            }
+        });
 
     }
 
@@ -49,10 +65,12 @@ public class LoaispAdapter extends RecyclerView.Adapter<LoaispAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txt_loaisp;
         ImageView img_anhloaisp;
+        LinearLayout layout_loaisp;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_loaisp=(TextView)itemView.findViewById(R.id.txt_lsp);
             img_anhloaisp = (ImageView)itemView.findViewById(R.id.img_loaisp);
+            layout_loaisp=(LinearLayout)itemView.findViewById(R.id.layout_loaisp);
         }
     }
 }

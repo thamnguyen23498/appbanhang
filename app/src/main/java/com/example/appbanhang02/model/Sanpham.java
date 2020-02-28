@@ -8,10 +8,9 @@ public class Sanpham {
     public int maloaisp;
     public Integer giasp;
 
-    public Sanpham(String tensp, String hinhanhsp, String motasp, Integer giasp) {
+    public Sanpham(String tensp, String hinhanhsp, Integer giasp) {
         this.tensp = tensp;
         this.hinhanhsp = hinhanhsp;
-        this.motasp = motasp;
         this.giasp = giasp;
     }
 
