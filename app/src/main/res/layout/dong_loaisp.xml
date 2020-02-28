@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="10"
+    android:id="@+id/layout_loaisp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_loaisp"
+            android:layout_width="123dp"
+            android:layout_height="73dp"
+            android:background="#DDDDDD"
+            android:src="@drawable/common_full_open_on_phone"
+            tools:ignore="Suspicious0dp"></ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="10"
+        android:layout_weight="7">
+
+        <TextView
+            android:id="@+id/txt_lsp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="Loại sản phẩm"
+            android:textColor="#E91E63"
+            android:textSize="24sp">
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>
