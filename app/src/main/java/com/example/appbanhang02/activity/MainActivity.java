@@ -1,13 +1,11 @@
 package com.example.appbanhang02.activity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ListView;
+
 import androidx.appcompat.widget.Toolbar;
 
 import android.widget.Toast;
@@ -25,25 +23,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.appbanhang02.R;
 import com.example.appbanhang02.adapter.LoaispAdapter;
-import com.example.appbanhang02.adapter.SanphamAdapter;
+import com.example.appbanhang02.adapter.SanphammoinhatAdapter;
 import com.example.appbanhang02.model.Loaisp;
 import com.example.appbanhang02.model.Sanpham;
-import com.example.appbanhang02.ultil.CheckConnection;
-import com.example.appbanhang02.ultil.Server;
 import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.Downloader;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 import static com.example.appbanhang02.ultil.Server.DuongdanLoaisp;
@@ -61,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     ArrayList<Sanpham> mangsanpham;
-    SanphamAdapter sanphamAdapter;
+    SanphammoinhatAdapter sanphamAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void GetDuLieuSP() {
        RequestQueue requestQueue = Volley.newRequestQueue(this);
-       StringRequest request = new StringRequest(Request.Method.GET, "http://192.168.101.107/serverappbanhang/getspmoinhat.php",
+       StringRequest request = new StringRequest(Request.Method.GET, Duongdanspmoinhat,
                new Response.Listener<String>() {
                    @Override
                    public void onResponse(String response) {
@@ -201,8 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mangsanpham = new ArrayList<>();
-        sanphamAdapter = new SanphamAdapter(getApplicationContext(),mangsanpham);
-
+        sanphamAdapter = new SanphammoinhatAdapter(getApplicationContext(),mangsanpham);
         recyclerView_main.setHasFixedSize(true);
         recyclerView_main.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView_main.setAdapter(sanphamAdapter);

@@ -17,7 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.appbanhang02.Interface.OnItemClickListener;
 import com.example.appbanhang02.R;
-import com.example.appbanhang02.adapter.DienThoaiAdapter;
+import com.example.appbanhang02.adapter.LaptopAdapter;
 import com.example.appbanhang02.model.Sanpham;
 
 import org.json.JSONArray;
@@ -30,14 +30,14 @@ import java.util.Map;
 
 import static com.example.appbanhang02.ultil.Server.Duongdansp;
 
-public class DienThoaiActivity extends AppCompatActivity implements OnItemClickListener {
-        RecyclerView rcl_dienthoai;
-        ArrayList<Sanpham> arrSp;
-        DienThoaiAdapter sanPhamAdapter;
+public class LaptopActivity extends AppCompatActivity implements OnItemClickListener {
+    RecyclerView rcl_laptop;
+    ArrayList<Sanpham> arrSp;
+    LaptopAdapter laptopAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dien_thoai);
+        setContentView(R.layout.activity_laptop);
         Anhxa();
         LaySanPham();
     }
@@ -45,7 +45,7 @@ public class DienThoaiActivity extends AppCompatActivity implements OnItemClickL
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
-        final int maloaisp = intent.getIntExtra("maloaisp",1);
+        final int maloaisp = intent.getIntExtra("maloaisp1",0);
         //Toast.makeText(getApplicationContext(),Integer.toString(maloaisp),Toast.LENGTH_LONG).show();
         StringRequest request = new StringRequest(Request.Method.POST, Duongdansp,
                 new Response.Listener<String>() {
@@ -66,7 +66,7 @@ public class DienThoaiActivity extends AppCompatActivity implements OnItemClickL
                                 ));
 
                             }
-                            sanPhamAdapter.notifyDataSetChanged();
+                            laptopAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -89,20 +89,20 @@ public class DienThoaiActivity extends AppCompatActivity implements OnItemClickL
     }
 
     private void Anhxa() {
-        rcl_dienthoai = (RecyclerView)findViewById(R.id.rcl_dienthoai);
+        rcl_laptop = (RecyclerView)findViewById(R.id.rcl_laptop);
         arrSp = new ArrayList<>();
-        sanPhamAdapter =new DienThoaiAdapter(arrSp,DienThoaiActivity.this,this);
-        rcl_dienthoai.setHasFixedSize(true);
-        rcl_dienthoai.setLayoutManager(new LinearLayoutManager(this));
-        rcl_dienthoai.setAdapter(sanPhamAdapter);
+        laptopAdapter =new LaptopAdapter(arrSp,LaptopActivity.this,this);
+        rcl_laptop.setHasFixedSize(true);
+        rcl_laptop.setLayoutManager(new LinearLayoutManager(this));
+        rcl_laptop.setAdapter(laptopAdapter);
 
     }
 
     @Override
     public void onItemClick(Sanpham sanpham) {
-        //Toast.makeText(getApplicationContext(),sanpham.getTensp(),Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getApplicationContext(), ChiTietDienThoaiActivity.class);
-        intent.putExtra("dienthoai",sanpham);
+        Intent intent = new Intent(getApplicationContext(),ChiTietLapTopActivity.class);
+        intent.putExtra("laptop",sanpham);
         startActivity(intent);
+
     }
 }

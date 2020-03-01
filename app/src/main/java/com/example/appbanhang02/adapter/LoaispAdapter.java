@@ -2,6 +2,7 @@ package com.example.appbanhang02.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbanhang02.R;
 import com.example.appbanhang02.activity.DienThoaiActivity;
+import com.example.appbanhang02.activity.LaptopActivity;
+import com.example.appbanhang02.activity.MainActivity;
 import com.example.appbanhang02.model.Loaisp;
 import com.squareup.picasso.Picasso;
 
@@ -47,9 +50,15 @@ public class LoaispAdapter extends RecyclerView.Adapter<LoaispAdapter.ViewHolder
                 switch (position){
                     case 0:
                         Intent intent = new Intent(context, DienThoaiActivity.class);
+                        intent.putExtra("maloaisp", loaisp.getMaloaisp()+1);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("maloaisp",loaisp.getMaloaisp());
                         context.startActivity(intent);
+                        break;
+                    case 1:
+                        Intent intent1 = new Intent(context, LaptopActivity.class);
+                        intent1.putExtra("maloaisp1", loaisp.getMaloaisp()+2);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent1);
                         break;
                 }
             }

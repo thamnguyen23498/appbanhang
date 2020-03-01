@@ -1,14 +1,12 @@
 package com.example.appbanhang02.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,17 +14,14 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbanhang02.R;
-import com.example.appbanhang02.activity.DienThoaiActivity;
 import com.example.appbanhang02.model.Sanpham;
 import com.squareup.picasso.Picasso;
 
-import org.apache.http.conn.ConnectTimeoutException;
-
 import java.util.ArrayList;
 
-public class SanphamAdapter extends RecyclerView.Adapter <SanphamAdapter.ItemHolder>{
+public class SanphammoinhatAdapter extends RecyclerView.Adapter <SanphammoinhatAdapter.ItemHolder>{
 
-    public SanphamAdapter(Context context, ArrayList<Sanpham> arraysanpham) {
+    public SanphammoinhatAdapter(Context context, ArrayList<Sanpham> arraysanpham) {
         this.context = context;
         this.arraysanpham = arraysanpham;
     }

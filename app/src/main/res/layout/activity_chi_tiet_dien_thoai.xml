@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".activity.DienThoaiActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/tb_ctdaotao"
+        android:background="@color/blue"
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:id="@+id/txt_chi_tiet_dt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Chi tiết điện thoại"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            ></TextView>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/img_dt"
+            android:src="@drawable/ic_launcher_background">
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/txt_tensp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Tên sản phẩm"
+                android:textColor="@color/black"
+                android:textSize="20sp">
+            </TextView>
+            <TextView
+                android:id="@+id/txt_giasp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="Giá sản phẩm"
+                android:textSize="20sp">
+            </TextView>
+            <Spinner
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:id="@+id/sp_soluongsp">
+            </Spinner>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Thêm vào giỏ hàng"
+                android:id="@+id/btn_them"
+                android:layout_margin="10dp">
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:text="Mô tả"
+        android:id="@+id/txt_motasp"
+        android:textSize="20sp"
+        android:textColor="@color/black">
+    </TextView>
+</LinearLayout>
