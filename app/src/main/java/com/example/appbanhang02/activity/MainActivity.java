@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void GetDuLieuSP() {
        RequestQueue requestQueue = Volley.newRequestQueue(this);
-       StringRequest request = new StringRequest(Request.Method.GET, Duongdanspmoinhat,
+       StringRequest request = new StringRequest(Request.Method.GET, "http://192.168.101.107/serverappbanhang/getspmoinhat.php",
                new Response.Listener<String>() {
                    @Override
                    public void onResponse(String response) {
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                }, new ErrorListener() {
            @Override
            public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
            }
        });
        requestQueue.add(request);
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 }, new ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(request);
