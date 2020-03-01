@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="white">#fff</color>
+    <color name="gray">#EEEEEE</color>
+    <color name="black">#000000</color>
+    <color name="blue">#4285f4</color>
+    <color name="tim_do">#D81B60</color>
+    <color name="gray_dam">#808080</color>
 </resources>
