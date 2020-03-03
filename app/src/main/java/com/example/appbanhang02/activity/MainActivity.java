@@ -1,5 +1,6 @@
 package com.example.appbanhang02.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,9 +26,11 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.appbanhang02.Interface.OnItemClickListener;
 import com.example.appbanhang02.R;
 import com.example.appbanhang02.adapter.LoaispAdapter;
 import com.example.appbanhang02.adapter.SanphammoinhatAdapter;
+import com.example.appbanhang02.model.GioHang;
 import com.example.appbanhang02.model.Loaisp;
 import com.example.appbanhang02.model.Sanpham;
 import com.google.android.material.navigation.NavigationView;
@@ -42,7 +45,7 @@ import java.util.ArrayList;
 import static com.example.appbanhang02.ultil.Server.DuongdanLoaisp;
 import static com.example.appbanhang02.ultil.Server.Duongdanspmoinhat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerView_main ,rcl_loaisp;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Sanpham> mangsanpham;
     SanphammoinhatAdapter sanphamAdapter;
+    public static ArrayList<GioHang> arrgiohang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +85,12 @@ public class MainActivity extends AppCompatActivity {
                            for (int i=0;i<jsonArray.length();i++){
                                JSONObject jsonObject= jsonArray.getJSONObject(i);
                                mangsanpham.add(new Sanpham(
+                                       jsonObject.getInt("masp"),
                                        jsonObject.getString("tensp"),
+                                       jsonObject.getInt("giasp"),
                                        jsonObject.getString("hinhsp"),
-                                       jsonObject.getInt("giasp")
+                                       jsonObject.getString("motasp"),
+                                       jsonObject.getInt("maloaisp")
                                ));
                            }
                            sanphamAdapter.notifyDataSetChanged();
@@ -160,6 +167,9 @@ public class MainActivity extends AppCompatActivity {
         Animation annotation_slide_out = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_out_right);
         viewFlipper.setInAnimation(annotation_slide_in);
         viewFlipper.setOutAnimation(annotation_slide_out);
+        if (arrgiohang == null){
+            arrgiohang = new ArrayList<>();
+        }
 
     }
 
@@ -194,9 +204,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         mangsanpham = new ArrayList<>();
-        sanphamAdapter = new SanphammoinhatAdapter(getApplicationContext(),mangsanpham);
+        sanphamAdapter = new SanphammoinhatAdapter(getApplicationContext(),mangsanpham,this);
         recyclerView_main.setHasFixedSize(true);
         recyclerView_main.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView_main.setAdapter(sanphamAdapter);
     }
+
+    @Override
+    public void onItemClick(Sanpham sanpham) {
+
+        Intent intent= new Intent(getApplicationContext(),ChiTietSpActivity.class);
+        intent.putExtra("dienthoai",sanpham);
+        startActivity(intent);
+    }
+
+
 }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -101,8 +102,9 @@ public class DienThoaiActivity extends AppCompatActivity implements OnItemClickL
     @Override
     public void onItemClick(Sanpham sanpham) {
         //Toast.makeText(getApplicationContext(),sanpham.getTensp(),Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getApplicationContext(), ChiTietDienThoaiActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ChiTietSpActivity.class);
         intent.putExtra("dienthoai",sanpham);
         startActivity(intent);
+        Log.d("abc","123");
     }
 }

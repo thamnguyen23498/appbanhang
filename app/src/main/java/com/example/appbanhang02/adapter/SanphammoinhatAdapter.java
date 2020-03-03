@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appbanhang02.Interface.OnItemClickListener;
 import com.example.appbanhang02.R;
 import com.example.appbanhang02.model.Sanpham;
 import com.squareup.picasso.Picasso;
@@ -21,11 +22,12 @@ import java.util.ArrayList;
 
 public class SanphammoinhatAdapter extends RecyclerView.Adapter <SanphammoinhatAdapter.ItemHolder>{
 
-    public SanphammoinhatAdapter(Context context, ArrayList<Sanpham> arraysanpham) {
+    public SanphammoinhatAdapter(Context context, ArrayList<Sanpham> arraysanpham,OnItemClickListener listener) {
         this.context = context;
         this.arraysanpham = arraysanpham;
+        this.listener = listener;
     }
-
+    OnItemClickListener listener;
     Context context;
     ArrayList<Sanpham> arraysanpham;
 
@@ -39,14 +41,8 @@ public class SanphammoinhatAdapter extends RecyclerView.Adapter <SanphammoinhatA
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
-        Sanpham sanpham = arraysanpham.get(position);
-        holder.txttensanpham.setText(sanpham.getTensp());
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.txtgiasanpham.setText("Giá : " + decimalFormat.format(sanpham.getGiasp() )+ " Đ");
-        Picasso.with(context).load(sanpham.getHinhanhsp())
-                .placeholder(R.drawable.common_google_signin_btn_icon_dark_disabled)
-                .error(R.drawable.ic_launcher_foreground)
-                .into(holder.imghinhanhsanpham);
+        holder.BindData(arraysanpham.get(position));
+
 
     }
 
@@ -58,13 +54,29 @@ public class SanphammoinhatAdapter extends RecyclerView.Adapter <SanphammoinhatA
     public class ItemHolder extends  RecyclerView.ViewHolder{
         public ImageView imghinhanhsanpham;
         public TextView txttensanpham , txtgiasanpham;
+        Sanpham sanpham;
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(sanpham);
+                }
+            });
             imghinhanhsanpham = (ImageView) itemView.findViewById(R.id.imgviewsp);
             txtgiasanpham = (TextView) itemView.findViewById(R.id.txtgiasp);
             txttensanpham = (TextView) itemView.findViewById(R.id.txttensp);
-
-
+        }
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public void BindData(Sanpham sanpham){
+            this.sanpham = sanpham;
+            txttensanpham.setText(this.sanpham.getTensp());
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+            txtgiasanpham.setText("Giá : " + decimalFormat.format(this.sanpham.getGiasp() )+ " Đ");
+            Picasso.with(context).load(this.sanpham.getHinhanhsp())
+                    .placeholder(R.drawable.common_google_signin_btn_icon_dark_disabled)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(imghinhanhsanpham);
         }
     }
 }

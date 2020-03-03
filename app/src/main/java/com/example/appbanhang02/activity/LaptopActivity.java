@@ -100,8 +100,8 @@ public class LaptopActivity extends AppCompatActivity implements OnItemClickList
 
     @Override
     public void onItemClick(Sanpham sanpham) {
-        Intent intent = new Intent(getApplicationContext(),ChiTietLapTopActivity.class);
-        intent.putExtra("laptop",sanpham);
+        Intent intent = new Intent(getApplicationContext(), ChiTietSpActivity.class);
+        intent.putExtra("dienthoai",sanpham);
         startActivity(intent);
 
     }
